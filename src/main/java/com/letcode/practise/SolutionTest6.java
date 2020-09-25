@@ -250,21 +250,48 @@ public class SolutionTest6 {
         setData(root.left,deep+1);
         setData(root.right,deep+1);
     }
+    static public class ListNode {
+      int val;
+      ListNode next;
+      ListNode(int x) { val = x; }
+  }
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        int temp=0;
+        return calc(l1,l2,temp);
+    }
+
+    ListNode calc(ListNode l1,ListNode l2,int up){
+        if(l1==null&&l2==null&&up==0){
+          return null;
+        }
+        int val=(l1!=null?l1.val:0)+(l2!=null?l2.val:0)+up;
+        if(val-10>=0){
+            up=1;
+        }else{
+            up=0;
+        }
+        ListNode node=new ListNode(up==1?val-10:val);
+        node.next=calc(l1!=null?l1.next:null,l2!=null?l2.next:null,up);
+        return node;
+    }
+
+
 
 
     public static void main(String[] args){
         SolutionTest6 solution=new SolutionTest6();
-        TreeNode treeNode=new TreeNode(1);
-        TreeNode treeNode1=new TreeNode(2);
-        TreeNode treeNode2=new TreeNode(2);
-        TreeNode treeNode3=new TreeNode(3);
-        TreeNode treeNode4=new TreeNode(4);
-        TreeNode treeNode5=new TreeNode(4);
-        treeNode1.left=treeNode3;
-        treeNode1.right=treeNode4;
-        treeNode2.left=treeNode5;
-        treeNode.left=treeNode1;
-        treeNode.right=treeNode2;
-        System.out.print( solution.isSymmetric(treeNode));
+        ListNode treeNode=new ListNode(0);
+        ListNode treeNode1=new ListNode(1);
+        ListNode treeNode2=new ListNode(0);
+        ListNode treeNode3=new ListNode(5);
+        ListNode treeNode4=new ListNode(6);
+        ListNode treeNode5=new ListNode(4);
+//        treeNode.next=treeNode1;
+
+        //1223 44
+        //3221+44
+        //5623 3265
+
+        System.out.print( solution.addTwoNumbers(treeNode,treeNode2));
     }
 }
